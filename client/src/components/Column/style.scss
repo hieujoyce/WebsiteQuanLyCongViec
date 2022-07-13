@@ -1,0 +1,52 @@
+.column {
+    width: 320px;
+    margin: 20px 0px 40px 40px;
+
+    flex-shrink: 0;
+    &__header {
+        display: flex;
+        align-items: center;
+        height: 40px;
+
+        &-form {
+            width: 270px;
+            input {
+                width: 100%;
+                padding: 8px 20px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: 16px;
+                text-transform: uppercase;
+            }
+        }
+
+        &-name {
+            text-transform: uppercase;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        &-add-task {
+            margin-left: auto;
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ddd;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            i {
+                font-size: 18px;
+            }
+            &:hover {
+                background-color: #ccc;
+            }
+        }
+    }
+
+    &__tasks {
+        min-height: 200px;
+    }
+}

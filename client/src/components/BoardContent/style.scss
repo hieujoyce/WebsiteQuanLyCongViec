@@ -1,0 +1,9 @@
+.board-content {
+    height: calc(100vh - var(--height-nav-top) - var(--height-header));
+    overflow-y: auto;
+    overflow-x: auto;
+    min-width: 800px;
+    .list-column {
+        display: flex;
+    }
+}

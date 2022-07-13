@@ -1,0 +1,129 @@
+.taskList {
+    padding: 10px 70px 20px 70px;
+
+    &__title {
+        font-size: 22px;
+        span {
+            display: inline-block;
+            background-color: var(--main-color);
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 20px;
+            color: #fff;
+            margin-left: 5px;
+        }
+    }
+
+    &__add {
+        margin-top: 20px;
+        background-color: #fff;
+        border: 2px solid var(--main-color);
+        padding: 10px 20px;
+        color: var(--main-color);
+        font-weight: 600;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    &__item {
+        // border: 1px solid #ccc;
+        box-shadow: var(--box-shadow);
+        background-color: #fff;
+        margin: 20px 0;
+        padding: 10px 30px;
+        border-radius: 10px;
+
+        &.work-loading {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        &-stt {
+            margin: 10px;
+        }
+
+        input[type="checkbox"] {
+            position: relative;
+            cursor: pointer;
+        }
+        input[type="checkbox"]:before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 0;
+            left: 0;
+            border: 2px solid var(--main-color);
+            border-radius: 3px;
+            background-color: white;
+        }
+        input[type="checkbox"]:checked:after {
+            content: "";
+            display: block;
+            width: 5px;
+            height: 10px;
+            border: solid var(--main-color);
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+            position: absolute;
+            top: 2px;
+            left: 6px;
+        }
+
+        &-name {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        &-date {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            border-radius: 5px;
+            margin: 10px 0;
+            color: #fff;
+
+            i {
+                font-size: 20px;
+            }
+
+            p {
+                margin-left: 5px;
+                font-size: 14px;
+            }
+        }
+
+        &-btns {
+            display: flex;
+            justify-content: flex-end;
+            button {
+                margin: 10px 0 0 10px;
+            }
+            button.delete i {
+                color: red;
+            }
+            button.delete:hover {
+                background-color: red;
+            }
+            button.delete:hover i {
+                color: #fff;
+            }
+            i {
+                font-size: 24px;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.model-delete {
+    width: 500px;
+    padding: 0 30px;
+    text-align: center;
+    .col-6 {
+        padding: 0 15px;
+    }
+}

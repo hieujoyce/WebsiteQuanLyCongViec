@@ -1,0 +1,125 @@
+.comment {
+    padding: 20px 70px;
+
+    &__header {
+        font-size: 24px;
+        padding: 10px 10px 5px 0;
+        font-weight: 600;
+        display: inline-block;
+        border-bottom: 4px solid var(--main-color);
+    }
+
+    &__input {
+        margin-top: 20px;
+        height: 130px;
+        position: relative;
+        textarea {
+            height: 130px;
+            width: 100%;
+            border-radius: 15px;
+            border: 1px solid #ccc;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 500;
+            font-family: "Open Sans", sans-serif;
+            outline: none;
+        }
+        &-btns {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            div i {
+                font-size: 24px;
+                margin: 0 10px 0 0;
+                cursor: pointer;
+            }
+
+            button.btn.contain {
+                padding: 10px 16px;
+            }
+        }
+    }
+
+    &__item {
+        margin: 20px 0;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 10px;
+        &-header {
+            display: flex;
+            align-items: center;
+            &__avatar {
+                height: 50px;
+                width: 50px;
+                position: relative;
+
+                img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+
+                &-active {
+                    height: 14px;
+                    width: 14px;
+                    position: absolute;
+                    background-color: var(--green);
+                    border-radius: 50%;
+                    bottom: 0px;
+                    right: 0px;
+                    border: 2px solid #fff;
+                }
+            }
+
+            &__name {
+                flex: 1;
+                margin: 0 20px;
+                font-size: 20px;
+            }
+
+            &__icon {
+                i {
+                    font-size: 24px;
+                }
+            }
+        }
+
+        &-content {
+            font-size: 16px;
+            font-weight: 500;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        &-footer {
+            display: flex;
+            margin-top: 10px;
+
+            div + div {
+                border-left: 1px solid #ccc;
+            }
+
+            &__icon {
+                margin-right: 15px;
+                cursor: pointer;
+                i {
+                    font-size: 24px;
+                }
+            }
+
+            &__reply {
+                padding: 0 15px;
+                cursor: pointer;
+                font-weight: 600;
+                font-size: 14px;
+            }
+
+            &__time {
+                padding-left: 15px;
+                font-size: 14px;
+            }
+        }
+    }
+}

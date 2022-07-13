@@ -1,0 +1,25 @@
+.taskDetail {
+    border-top: 1px solid #ddd;
+    height: calc(100vh - var(--height-nav-top));
+
+    &__container {
+        overflow-y: auto;
+        height: calc(100vh - var(--height-nav-top));
+
+        &-btn {
+            margin: 20px 0 0 70px;
+            button {
+                display: flex;
+                align-items: center;
+                i {
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+
+    &__right {
+        background-color: var(--main-bg);
+        height: calc(100vh - var(--height-nav-top));
+    }
+}

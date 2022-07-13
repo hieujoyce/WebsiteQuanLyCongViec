@@ -1,0 +1,120 @@
+.board-home {
+    &__header {
+        background-color: var(--main-bg);
+        border-bottom: 1px solid #ddd;
+        h2 {
+            font-size: 26px;
+            color: var(--txt-gray);
+            font-weight: 600;
+            padding: 0 30px 20px 30px;
+
+            span.active {
+                color: var(--main-color);
+            }
+        }
+    }
+
+    &__body {
+        .projects {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 0.25fr));
+            gap: 30px;
+
+            a:hover {
+                color: unset;
+            }
+
+            .project {
+                border-radius: 10px;
+                overflow: hidden;
+                // border: 1px solid #ddd;
+                box-shadow: var(--box-shadow);
+                position: relative;
+                background-color: #fff;
+                transition: all 0.2s ease-in-out;
+
+                &__icons {
+                    position: absolute;
+                    z-index: 10;
+                    right: 10px;
+                    top: 10px;
+
+                    i {
+                        color: var(--main-bg);
+                        font-size: 24px;
+                        margin-left: 10px;
+                    }
+                }
+
+                &:hover {
+                    box-shadow: var(--box-shadow-2);
+                    .project__img img {
+                        transform: scale(1.1);
+                    }
+                }
+                &__img {
+                    overflow: hidden;
+                    height: 200px;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        transition: all 0.2s ease-in-out;
+                    }
+                }
+                &__info {
+                    padding: 10px 20px;
+
+                    .name {
+                        font-size: 20px;
+                        font-weight: 500;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 1; /* number of lines to show */
+                        line-clamp: 1;
+                        -webkit-box-orient: vertical;
+                    }
+
+                    .dec {
+                        margin-top: 5px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2; /* number of lines to show */
+                        line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                    }
+                }
+            }
+
+            .add-project {
+                min-height: 200px;
+                max-width: 400px;
+                background-color: var(--main-color);
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+                i {
+                    font-size: 50px;
+                    color: var(--txt-white);
+                }
+
+                &:hover {
+                    background-color: var(--second-color);
+                }
+            }
+        }
+
+        .container-spinner {
+            margin: 30px 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

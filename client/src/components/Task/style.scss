@@ -1,0 +1,86 @@
+.task {
+    background-color: var(--main-bg);
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 1px 2px #ddd;
+
+    &.loading {
+        opacity: 0.3;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 5px;
+
+        &-tag {
+            color: var(--txt-white);
+            padding: 3px 10px;
+            border-radius: 1000px;
+            font-size: 14px;
+        }
+
+        &-icon {
+            cursor: pointer;
+            i {
+                font-size: 20px;
+                color: var(--txt-gray);
+            }
+        }
+    }
+
+    &__body {
+        &-name {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        &-dec {
+            font-size: 14px;
+            color: var(--txt-gray);
+            margin-bottom: 10px;
+        }
+
+        &-date {
+            display: flex;
+            align-items: center;
+            color: var(--txt-gray);
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 10px;
+
+            i {
+                margin-right: 5px;
+                font-size: 18px;
+            }
+        }
+    }
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &-right {
+            display: flex;
+            &__item {
+                display: flex;
+                align-items: center;
+                color: var(--txt-gray);
+                font-size: 16px;
+                cursor: pointer;
+                i {
+                    font-size: 18px;
+                    margin-right: 2px;
+                }
+            }
+
+            &__item + &__item {
+                margin-left: 10px;
+            }
+        }
+    }
+}
