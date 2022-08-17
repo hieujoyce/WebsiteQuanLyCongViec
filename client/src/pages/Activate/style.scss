@@ -1,0 +1,65 @@
+.act {
+    border-top: 1px solid #ddd;
+
+    &__container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    &__list {
+        margin: 20px 0;
+        &-container {
+            height: calc(100vh - var(--height-nav-top) - 100px);
+            overflow-y: auto;
+        }
+    }
+
+    &__item {
+        margin: 20px 0;
+        display: flex;
+        &-left {
+            width: 70px;
+            i {
+                font-size: 30px;
+            }
+
+            &__img {
+                height: 45px;
+                width: 45px;
+                border-radius: 50%;
+                overflow: hidden;
+                img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+        &-right {
+            flex: 1;
+
+            h3 {
+                border-bottom: 1px solid #ccc;
+                padding-bottom: 10px;
+            }
+
+            p {
+                font-size: 16px;
+                font-weight: 400;
+
+                a {
+                    font-weight: 600;
+                }
+            }
+
+            p + p {
+                font-size: 14px;
+            }
+        }
+    }
+
+    &__spinner {
+        display: flex;
+        justify-content: center;
+    }
+}

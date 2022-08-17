@@ -20,7 +20,7 @@ const ManagerMembers = ({ close }) => {
         setModelDelete(false);
     }
 
-    function handleAddUser(id) {
+    function handleAddUser(id, username) {
         dispatch(
             updateProjectv2({
                 data: {
@@ -28,6 +28,7 @@ const ManagerMembers = ({ close }) => {
                 },
                 token: auth.token,
                 idProject: project.data._id,
+                content: `đã thêm ${username} vào dự án`,
             })
         );
         setValue("");
@@ -36,6 +37,7 @@ const ManagerMembers = ({ close }) => {
 
     function handleRemoveUser() {
         let cloneArr = [...project.data.members];
+        let username = cloneArr.find((el) => el._id === idUserDelete).username;
         let newMembers = cloneArr.filter((el) => el._id !== idUserDelete);
 
         dispatch(
@@ -45,6 +47,7 @@ const ManagerMembers = ({ close }) => {
                 },
                 token: auth.token,
                 idProject: project.data._id,
+                content: `đã xóa ${username} ra khỏi dự án`,
             })
         );
         setModelDelete(false);
@@ -52,6 +55,8 @@ const ManagerMembers = ({ close }) => {
 
     function handleAddAdmins(id) {
         let newAdmins = [...project.data.admins, id];
+        let cloneArr = [...project.data.members];
+        let username = cloneArr.find((el) => el._id === id).username;
 
         dispatch(
             updateProjectv2({
@@ -60,6 +65,7 @@ const ManagerMembers = ({ close }) => {
                 },
                 token: auth.token,
                 idProject: project.data._id,
+                content: `đã cho ${username} lên làm quản trị viên`,
             })
         );
     }
@@ -98,7 +104,7 @@ const ManagerMembers = ({ close }) => {
             )}
             <div className="managerMembers">
                 <h2>Quản lý thành viên</h2>
-                <h3>Dự án xây nhà.</h3>
+                <h3>{project.data.title}</h3>
                 <div className="input-group managerMembers__input">
                     <input
                         type="text"
@@ -120,7 +126,10 @@ const ManagerMembers = ({ close }) => {
                                     ) === -1 && (
                                         <div
                                             onClick={() =>
-                                                handleAddUser(el._id)
+                                                handleAddUser(
+                                                    el._id,
+                                                    el.username
+                                                )
                                             }
                                             className="add-user"
                                         >

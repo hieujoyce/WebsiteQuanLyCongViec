@@ -3,7 +3,7 @@ import DatePicker from "react-date-picker";
 import "./DatePicker.scss";
 import "./Calender.scss";
 import CustomDeleteModel from "./CustomDeleteModel";
-import { deleteApi, patchApi } from "../../../utils/api";
+import { deleteApi, patchApi, postApi } from "../../../utils/api";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteWork, updateWork } from "../../../redux/taskSlice";
@@ -38,6 +38,14 @@ const TaskItem = ({ index, workData }) => {
             .finally(() => {
                 setWorkLoading(false);
             });
+        let content = `đã ${checked ? "" : "bỏ"} tích chọn công việc ${
+            workData.title
+        } trong thẻ ${task.data?.title}`;
+        postApi(
+            "/activate",
+            { content, project: project.data?._id },
+            auth.token
+        );
     }
 
     function onChangeDeadline(e) {
@@ -78,7 +86,12 @@ const TaskItem = ({ index, workData }) => {
             .catch((err) => {
                 toast.error(err.response.data.msg);
             });
-
+        let content = `đã xóa công việc ${workData.title} trong thẻ ${task.data?.title}`;
+        postApi(
+            "/activate",
+            { content, project: project.data?._id },
+            auth.token
+        );
         setModelDelete(false);
     }
 

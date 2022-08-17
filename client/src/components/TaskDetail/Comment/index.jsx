@@ -17,6 +17,7 @@ const Comment = () => {
                 token: auth.token,
                 idProject: project.data._id,
                 idTask: task.data._id,
+                content: `đã coment trong thẻ ${task.data.title}`,
             })
         );
         setValue("");

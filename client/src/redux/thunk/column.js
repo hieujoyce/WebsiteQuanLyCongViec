@@ -3,9 +3,10 @@ import { postApi, patchApi } from "../../utils/api";
 
 const createTask = createAsyncThunk(
     "users/createTask",
-    async ({ data, token, idProject }, thunkApi) => {
+    async ({ data, token, idProject, content }, thunkApi) => {
         try {
             const res = await postApi(`project/${idProject}/task`, data, token);
+            await postApi("/activate", { content, project: idProject }, token);
             return res.data;
         } catch (error) {
             const errMsg = error.response.data.err || error.message;
@@ -16,13 +17,14 @@ const createTask = createAsyncThunk(
 
 const createTaskComment = createAsyncThunk(
     "users/createTaskComment",
-    async ({ data, token, idProject, idTask }, thunkApi) => {
+    async ({ data, token, idProject, idTask, content }, thunkApi) => {
         try {
             const res = await postApi(
                 `project/${idProject}/task/${idTask}/comment`,
                 data,
                 token
             );
+            await postApi("/activate", { content, project: idProject }, token);
             return res.data;
         } catch (error) {
             const errMsg = error.response.data.err || error.message;
@@ -67,7 +69,10 @@ const createColumn = createAsyncThunk(
 
 const updateColumn = createAsyncThunk(
     "users/updateColumn",
-    async ({ token, sourceColumnData, desColumnData, idProject }, thunkApi) => {
+    async (
+        { token, sourceColumnData, desColumnData, idProject, content },
+        thunkApi
+    ) => {
         try {
             const res1 = await patchApi(
                 `project/${idProject}/column/${sourceColumnData.id}`,
@@ -82,6 +87,8 @@ const updateColumn = createAsyncThunk(
                 desColumnData.data,
                 token
             );
+
+            await postApi("/activate", { content, project: idProject }, token);
 
             return [res1.data, res2.data];
         } catch (error) {

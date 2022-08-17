@@ -182,62 +182,8 @@ const TaskRight = () => {
             <div className="taskRight__date ml-40">
                 <DatePicker value={value} onChange={onChangeDeadline} />
             </div>
-            <div className="taskRight__name">
-                <div className="taskRight__name-icon">
-                    <i className="bx bx-group"></i>
-                </div>
-                <p>Thành viên</p>
-            </div>
-
-            <div className="taskRight__members ml-40">
-                <div className="members">
-                    {members.slice(0, 4).map((e, i) => {
-                        return (
-                            <div className="avatar" key={i}>
-                                <img src={e.avatar} alt="" />
-                            </div>
-                        );
-                    })}
-                    {members.length > 4 && (
-                        <div className="avatar">
-                            <div className="more">+{members.length - 4}</div>
-                        </div>
-                    )}
-                </div>
-                <button className="btn contain">Quản lý thành viên</button>
-            </div>
         </div>
     );
 };
 
 export default TaskRight;
-
-let members = [
-    {
-        avatar: "https://images.pexels.com/photos/8145352/pexels-photo-8145352.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=400&h=250&fit=crop&crop=focalpoint",
-    },
-    {
-        avatar: "https://images.pexels.com/photos/8145352/pexels-photo-8145352.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=400&h=250&fit=crop&crop=focalpoint",
-    },
-    {
-        avatar: "https://images.pexels.com/photos/8145352/pexels-photo-8145352.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=400&h=250&fit=crop&crop=focalpoint",
-    },
-    {
-        avatar: "https://images.pexels.com/photos/8145352/pexels-photo-8145352.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=400&h=250&fit=crop&crop=focalpoint",
-    },
-    {
-        avatar: "https://images.pexels.com/photos/8145352/pexels-photo-8145352.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=400&h=250&fit=crop&crop=focalpoint",
-    },
-    {
-        avatar: "https://images.pexels.com/photos/8145352/pexels-photo-8145352.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=400&h=250&fit=crop&crop=focalpoint",
-    },
-    {
-        avatar: "https://images.pexels.com/photos/8145352/pexels-photo-8145352.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=400&h=250&fit=crop&crop=focalpoint",
-    },
-    {
-        avatar: "https://images.pexels.com/photos/8145352/pexels-photo-8145352.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=400&h=250&fit=crop&crop=focalpoint",
-    },
-    {
-        avatar: "https://images.pexels.com/photos/8145352/pexels-photo-8145352.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=400&h=250&fit=crop&crop=focalpoint",
-    },
-];

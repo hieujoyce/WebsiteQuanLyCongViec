@@ -27,6 +27,9 @@ const BoardContend = () => {
                 let dragColumn = cloneProject.columns.find(
                     (e) => e._id === destination.droppableId
                 );
+                let nameTask = dragColumn.tasks.find(
+                    (e) => e._id === dragColumn.taskOrder[source.index]
+                ).title;
                 dragColumn.taskOrder.splice(source.index, 1);
                 dragColumn.taskOrder.splice(destination.index, 0, draggableId);
                 const data = {
@@ -34,6 +37,7 @@ const BoardContend = () => {
                     taskOrder: [...dragColumn.taskOrder],
                     tasks: dragColumn.tasks.map((el) => el._id),
                 };
+                let content = `đã thay đổi vị trí thẻ ${nameTask} trong cột ${dragColumn.title}`;
                 dispatch(
                     updateColumn({
                         token: auth.token,
@@ -42,6 +46,7 @@ const BoardContend = () => {
                             data,
                         },
                         idProject: project._id,
+                        content,
                     })
                 );
             } else {
@@ -51,6 +56,9 @@ const BoardContend = () => {
                 let desColumn = cloneProject.columns.find(
                     (e) => e._id === destination.droppableId
                 );
+                let nameTask = sourceColumn.tasks.find(
+                    (e) => e._id === sourceColumn.taskOrder[source.index]
+                ).title;
                 sourceColumn.taskOrder.splice(source.index, 1);
                 let dragTask = sourceColumn.tasks.find(
                     (e) => e._id === draggableId
@@ -71,6 +79,7 @@ const BoardContend = () => {
                     taskOrder: [...desColumn.taskOrder],
                     tasks: desColumn.tasks.map((e) => e._id),
                 };
+                let content = `đã di chuyển thẻ ${nameTask} từ cột ${sourceColumn.title} sang cột ${desColumn.title}`;
                 dispatch(
                     updateColumn({
                         token: auth.token,
@@ -83,19 +92,25 @@ const BoardContend = () => {
                             data: dataDes,
                         },
                         idProject: project._id,
+                        content,
                     })
                 );
             }
         } else if (type === "column") {
             let cloneProject = JSON.parse(JSON.stringify(project));
+            const nameColumn = cloneProject.columns.find(
+                (e) => e._id === cloneProject.columnOrder[source.index]
+            ).title;
             cloneProject.columnOrder.splice(source.index, 1);
             cloneProject.columnOrder.splice(destination.index, 0, draggableId);
+            let content = `đã di chuyển vị trí cột ${nameColumn}`;
             // setBoard(cloneProject);
             dispatch(
                 updateProjectColumnOrder({
                     data: { columnOrder: [...cloneProject.columnOrder] },
                     token: auth.token,
                     id: project._id,
+                    content,
                 })
             );
         } else {

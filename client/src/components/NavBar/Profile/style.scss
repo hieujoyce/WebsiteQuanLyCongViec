@@ -1,0 +1,63 @@
+.profile {
+    width: 500px;
+
+    h2 {
+        text-align: center;
+        margin-top: -20px;
+        font-size: 26px;
+        font-weight: 600;
+    }
+
+    &__avatar {
+        border-top: 1px solid #ddd;
+        padding-top: 30px;
+        margin: 20px 30px;
+        display: flex;
+        align-items: center;
+        &-img {
+            height: 150px;
+            width: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        &-btn {
+            margin-left: 50px;
+            button.btn {
+                margin: 10px 0;
+            }
+        }
+    }
+
+    .input-group {
+        margin: 20px 30px 10px 30px;
+        label {
+            font-size: 20px;
+            display: block;
+            padding-bottom: 5px;
+            color: gray;
+        }
+    }
+}
+
+.linkModel {
+    padding: 0 30px;
+    text-align: center;
+
+    h3 {
+        margin-bottom: 15px;
+    }
+    .col-6 {
+        padding-right: 10px;
+    }
+    .col-6 + .col-6 {
+        padding-left: 10px;
+        padding-right: 0px;
+    }
+}

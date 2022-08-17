@@ -13,6 +13,8 @@ export default function isAuth(req, res, next) {
         if (!findUsername)
             return res.status(400).json({ err: "Lỗi xác thực." });
         req.user = findUsername;
+        // console.log(req.user);
+        // console.log(req.user.projects);
         next();
     });
 }

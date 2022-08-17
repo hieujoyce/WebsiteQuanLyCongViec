@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema(
         avatar: {
             type: String,
             default:
-                "https://scontent.fhan14-1.fna.fbcdn.net/v/t1.6435-1/204612696_513858903381871_4463796854127515799_n.jpg?stp=dst-jpg_p160x160&_nc_cat=107&ccb=1-7&_nc_sid=7206a8&_nc_ohc=OtIkU7GbP08AX_Rsmun&_nc_ht=scontent.fhan14-1.fna&oh=00_AT-U7MCQP3NCCyeJgaP_pRxG47xu8CE8XfoOsPO18uaffg&oe=62B920BB",
+                "https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-6/273843600_3181275192141119_4501962545142513337_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=1uZto8_7u7UAX_lmdit&_nc_ht=scontent.fhan2-4.fna&oh=00_AT9mmIWzzmOpOfkZqX8zvi8SmoB7CiuZyiJCe5qqC3Jesg&oe=6300C76A",
         },
         projects: [
             {

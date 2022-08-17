@@ -41,6 +41,7 @@ export const createProject = async (req, res) => {
 export const getAllProject = async (req, res) => {
     try {
         const data = await Project.find({ members: req.user._id });
+        console.log(data.map((e) => `${e._id}`));
         return res.json({
             msg: "Lấy dữ liệu thành công.",
             projects: data,

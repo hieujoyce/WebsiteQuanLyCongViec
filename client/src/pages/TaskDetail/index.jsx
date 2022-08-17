@@ -38,7 +38,7 @@ const TaskDetail = () => {
 
     return (
         <div className="taskDetail row">
-            <div className="col-7">
+            <div className="col-8">
                 <div className="taskDetail__container">
                     <div className="taskDetail__container-btn">
                         <button
@@ -53,7 +53,7 @@ const TaskDetail = () => {
                     <Comment />
                 </div>
             </div>
-            <div className="col-5">
+            <div className="col-4">
                 <div className="taskDetail__right">
                     <TaskRight />
                 </div>

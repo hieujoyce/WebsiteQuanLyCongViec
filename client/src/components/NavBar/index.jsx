@@ -23,10 +23,15 @@ const NavBar = () => {
                 </div>
             </div>
             <div className="mid">
-                <div className="item">
+                <Link
+                    to={"/activate"}
+                    className={`item ${
+                        p.pathname === "/activate" ? "active" : ""
+                    }`}
+                >
                     <i className="bx bx-run"></i>
                     <p>Hoạt động</p>
-                </div>
+                </Link>
                 <div className="item">
                     <i className="bx bx-check-circle"></i>
                     <p>Công việc của tôi</p>

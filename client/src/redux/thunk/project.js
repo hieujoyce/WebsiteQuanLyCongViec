@@ -35,9 +35,10 @@ const updateProject = createAsyncThunk(
 
 const updateProjectv2 = createAsyncThunk(
     "users/updateProjectv2",
-    async ({ data, token, idProject }, thunkApi) => {
+    async ({ data, token, idProject, content }, thunkApi) => {
         try {
             const res = await patchApi(`/project/${idProject}`, data, token);
+            await postApi("/activate", { content, project: idProject }, token);
             return res.data;
         } catch (error) {
             const errMsg = error.response.data.err || error.message;
@@ -48,9 +49,10 @@ const updateProjectv2 = createAsyncThunk(
 
 const updateProjectColumnOrder = createAsyncThunk(
     "users/updateProjectColumnOrder",
-    async ({ data, token, id }, thunkApi) => {
+    async ({ data, token, id, content }, thunkApi) => {
         try {
             const res = await patchApi(`/project/${id}`, data, token);
+            await postApi("/activate", { content, project: id }, token);
             return res.data;
         } catch (error) {
             const errMsg = error.response.data.err || error.message;

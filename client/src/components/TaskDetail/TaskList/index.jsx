@@ -36,6 +36,12 @@ const TaskList = () => {
             .catch((err) => {
                 toast.error(err.response.data.err);
             });
+        let content = `đã thêm công việc ${data.title} trong thẻ ${task.data?.title}`;
+        postApi(
+            "/activate",
+            { content, project: project.data?._id },
+            auth.token
+        );
         setModelAdd(false);
     }
 

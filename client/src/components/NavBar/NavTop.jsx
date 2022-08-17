@@ -1,9 +1,13 @@
-import React from "react";
+import { useState } from "react";
 import "./nav-top.scss";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Profile from "./Profile";
 
 const NavTop = () => {
+    const [profileModel, setProfileModel] = useState(false);
+    function close() {
+        setProfileModel(false);
+    }
     function logout() {
         localStorage.removeItem("logger");
         window.location.href = "/login";
@@ -13,6 +17,7 @@ const NavTop = () => {
 
     return (
         <div className="nav-top">
+            {profileModel && <Profile close={close} />}
             <div className="search">
                 <div className="back icon">
                     <i className="bx bx-left-arrow-alt"></i>
@@ -34,10 +39,13 @@ const NavTop = () => {
                     <p className="name">{auth.user.username}</p>
                     <i className="bx bx-chevron-down"></i>
                     <div className="dropdown__content">
-                        <Link to={"/profile"} className="item">
+                        <div
+                            className="item"
+                            onClick={() => setProfileModel(true)}
+                        >
                             <i className="bx bx-user-circle"></i>
                             <p>Profile</p>
-                        </Link>
+                        </div>
                         <div className="line">
                             <div></div>
                         </div>

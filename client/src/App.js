@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import DefaultLayout from "./components/layouts/DefaultLayout";
 import RequireAuth from "./components/RequireAuth";
-import { Home, Login, NotFound, Register } from "./pages";
+import { Activate, Login, NotFound, Register } from "./pages";
 import { useDispatch } from "react-redux";
 import refreshToken from "./redux/thunk/refreshToken";
 import Board from "./pages/Board";
@@ -28,13 +28,14 @@ function App() {
                     </RequireAuth>
                 }
             >
-                <Route index element={<Home />} />
+                <Route index element={<BoardHome />} />
                 <Route
                     path="/board/:idBoard/task/:idTask"
                     element={<TaskDetail />}
                 />
                 <Route path="/board/:id" element={<Board />} />
                 <Route path="/board" element={<BoardHome />} />
+                <Route path="/activate" element={<Activate />} />
             </Route>
 
             <Route path="*" element={<NotFound />} />

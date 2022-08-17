@@ -16,6 +16,7 @@ import {
 import { isAuth, isAdmins, isMembers } from "../middleware/index.js";
 import { createWork, deleteWork, updateWork } from "../controllers/workCtrl.js";
 import { createComment } from "../controllers/commentCtrl.js";
+import { createActivate, getActivates } from "../controllers/activateCtrl.js";
 
 const router = Router();
 
@@ -89,5 +90,7 @@ router.post(
     isMembers,
     createComment
 );
+router.post("/activate", isAuth, createActivate);
+router.get("/activate", isAuth, getActivates);
 
 export default router;
