@@ -134,8 +134,7 @@ const BoardHome = () => {
             )}
             <div className="board-home__header">
                 <h2>
-                    <span>Dự án</span> /{" "}
-                    <span className="active">Dự án của tôi</span>
+                    <span className="active">Dự án</span>
                 </h2>
             </div>
             <div className="board-home__body">

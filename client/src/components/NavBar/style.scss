@@ -9,6 +9,9 @@
     display: flex;
     flex-direction: column;
     font-size: 14px;
+    overflow: hidden;
+    transition: width 0.5s ease-in-out;
+    z-index: 10;
 
     .item {
         position: relative;
@@ -98,7 +101,7 @@
             cursor: pointer;
 
             i {
-                font-size: 22px;
+                font-size: 30px;
             }
         }
     }

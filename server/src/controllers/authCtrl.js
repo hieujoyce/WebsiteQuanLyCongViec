@@ -10,17 +10,20 @@ const secretAcToken = process.env.AC_TOKEN;
 
 export const register = async (req, res) => {
     try {
-        const { username, password } = req.body;
+        const { email, username, password } = req.body;
         const findUser = await User.findOne({ username });
         if (findUser)
             return res
                 .status(400)
                 .json({ err: "Tên tài khoản đã có người sử dụng." });
+        const findUser1 = await User.findOne({ email });
+        if (findUser1)
+            return res.status(400).json({ err: "Email đã có người sử dụng." });
 
         const err = validateRegister(username, password);
         if (err.length > 0) return res.status(400).json({ err: err });
         const hashPw = await bcrypt.hash(password, 12);
-        const user = new User({ username, password: hashPw });
+        const user = new User({ email, username, password: hashPw });
         // const rfToken = jwt.sign({ id: user._id }, secretRfToken, {
         //     expiresIn: "30d",
         // });
@@ -49,12 +52,12 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
     try {
-        const { username, password } = req.body;
-        const findUser = await User.findOne({ username });
+        const { email, password } = req.body;
+        const findUser = await User.findOne({ email });
         if (!findUser)
             return res
                 .status(400)
-                .json({ err: "Tên tài khoản hoặc mật khẩu không chính xác." });
+                .json({ err: "Email hoặc mật khẩu không chính xác." });
 
         const result = bcrypt.compareSync(password, findUser.password);
         if (!result)

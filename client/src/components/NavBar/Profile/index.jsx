@@ -14,56 +14,67 @@ const Profile = ({ close }) => {
     return (
         <Model close={close}>
             {linkModel && (
-                <LinkModel avatar={auth.user.avatar} close={closeLinkModel} />
+                <LinkModel
+                    avatar={auth.user.avatar}
+                    close={closeLinkModel}
+                    username={auth.user.username}
+                />
             )}
             <div className="profile">
-                <h2>Profile</h2>
+                <h2>Thông tin cá nhân</h2>
                 <div className="profile__avatar">
                     <div className="profile__avatar-img">
                         <img src={auth.user.avatar} alt="" />
                     </div>
-                    <div className="profile__avatar-btn">
-                        <button
-                            className="btn change"
-                            onClick={() => setLinkModel(true)}
-                        >
-                            Thay đổi link avatar
-                        </button>
-                        <button className="btn bg-pink delete">
-                            Xóa link avatar
-                        </button>
+                    <div
+                        className="profile__avatar-btn"
+                        onClick={() => setLinkModel(true)}
+                    >
+                        <i className="bx bxs-edit-alt"></i>
                     </div>
                 </div>
-                <div className="input-group">
-                    <label htmlFor="username">Tên tài khoản:</label>
-                    <input
-                        type="text"
-                        name="username"
-                        id=""
-                        readOnly
-                        value={auth.user.username}
-                    />
+                <div className="profile__item">
+                    <i className="bx bxs-envelope"></i>
+                    <p>{auth.user.email}</p>
+                </div>
+                <div className="profile__item">
+                    <i className="bx bxs-user"></i>
+                    <p>{auth.user.username}</p>
                 </div>
             </div>
         </Model>
     );
 };
 
-const LinkModel = ({ close, avatar }) => {
+const LinkModel = ({ close, avatar, username }) => {
     const [avatarValue, setAvatarValue] = useState(avatar);
+    const [usernameValue, setUsernameValue] = useState(username);
     const { auth } = useSelector((state) => state);
     function onChangeInput(e) {
         const value = e.target.value;
         setAvatarValue(value);
     }
+
+    function onChangeInputUsername(e) {
+        const value = e.target.value;
+        setUsernameValue(value);
+    }
     const dispatch = useDispatch();
     function handleChangeLinkAvatar() {
-        if (avatarValue === avatar) return;
+        if (avatarValue === avatar && usernameValue === username) return;
+        let data;
+        if (avatarValue === avatar) {
+            data = {
+                username: usernameValue,
+            };
+        } else {
+            data = {
+                avatar: avatarValue,
+            };
+        }
         dispatch(
             updateProfile({
-                data: {
-                    avatar: avatarValue,
-                },
+                data,
                 token: auth.token,
                 id: auth.user._id,
             })
@@ -78,12 +89,23 @@ const LinkModel = ({ close, avatar }) => {
                 <div className="input-group">
                     <input
                         type="text"
-                        name="username"
+                        name="avatar"
                         id=""
                         value={avatarValue}
                         onChange={onChangeInput}
                     />
                     <i className="bx bx-photo-album"></i>
+                </div>
+                <h3>Username</h3>
+                <div className="input-group">
+                    <input
+                        type="text"
+                        name="username"
+                        id=""
+                        value={usernameValue}
+                        onChange={onChangeInputUsername}
+                    />
+                    <i className="bx bxs-user"></i>
                 </div>
                 <div className="btns row">
                     <div className="col-6">

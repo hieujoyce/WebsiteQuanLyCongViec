@@ -1,73 +1,48 @@
 import React, { useRef, useState } from "react";
-import "./style.scss";
-import Model from "../../../components/Model";
+import Model from "../../../Model";
 import { useSelector, useDispatch } from "react-redux";
-import { updateProjectv2 } from "../../../redux/thunk/project";
-import { getApi } from "../../../utils/api";
-import { toast } from "react-toastify";
-import CustomDeleteModel from "../../BoardHome/CustomDeleteModel";
+import { updateTask } from "../../../../redux/thunk/column";
 
-const ManagerMembers = ({ close }) => {
+const ManagerMemberTask = ({ close }) => {
     const [value, setValue] = useState("");
-    const { project, auth } = useSelector((state) => state);
-    const timeOutRef = useRef(null);
-    const [resultMembers, setResultMembers] = useState([]);
     const dispatch = useDispatch();
-    const [modelDelete, setModelDelete] = useState(false);
-    const [idUserDelete, setIdUserDelete] = useState(null);
-
-    function closeModelDelete() {
-        setModelDelete(false);
-    }
-
+    const { task, project, auth } = useSelector((state) => state);
+    const [resultMembers, setResultMembers] = useState([]);
+    const timeOutRef = useRef(null);
     function handleAddUser(id, username) {
         dispatch(
-            updateProjectv2({
+            updateTask({
                 data: {
-                    members: [...project.data.members, id],
+                    members: [...task.data.members.map((el) => el._id), id],
                 },
                 token: auth.token,
                 idProject: project.data._id,
-                content: `đã thêm ${username} vào dự án`,
+                idTask: task.data._id,
+                content: `đã thêm ${username} vào nhiệm vụ ${task.data.title}`,
             })
         );
         setValue("");
         setResultMembers([]);
     }
 
-    function handleRemoveUser() {
-        let cloneArr = [...project.data.members];
-        let username = cloneArr.find((el) => el._id === idUserDelete).username;
-        let newMembers = cloneArr.filter((el) => el._id !== idUserDelete);
+    function handleRemoveUser(id, username) {
+        let members = task.data.members
+            .map((el) => el._id)
+            .filter((el) => el !== id);
 
         dispatch(
-            updateProjectv2({
+            updateTask({
                 data: {
-                    members: newMembers,
+                    members,
                 },
                 token: auth.token,
                 idProject: project.data._id,
-                content: `đã xóa ${username} ra khỏi dự án`,
+                idTask: task.data._id,
+                content: `đã xóa ${username} khỏi nhiệm vụ ${task.data.title}`,
             })
         );
-        setModelDelete(false);
-    }
-
-    function handleAddAdmins(id) {
-        let newAdmins = [...project.data.admins, id];
-        let cloneArr = [...project.data.members];
-        let username = cloneArr.find((el) => el._id === id).username;
-
-        dispatch(
-            updateProjectv2({
-                data: {
-                    admins: newAdmins,
-                },
-                token: auth.token,
-                idProject: project.data._id,
-                content: `đã cho ${username} lên làm quản trị viên`,
-            })
-        );
+        setValue("");
+        setResultMembers([]);
     }
 
     function onChangeInput(e) {
@@ -81,30 +56,18 @@ const ManagerMembers = ({ close }) => {
             return;
         }
         timeOutRef.current = setTimeout(() => {
-            getApi(`/searchUser?search=${value}`, auth.token)
-                .then((res) => {
-                    setResultMembers(res.data.searchUsers);
-                })
-                .catch((err) => {
-                    toast.error(err.response.data.err);
-                });
+            let searchUser = project.data.members.filter((el) =>
+                el.username.startsWith(value)
+            );
+            setResultMembers(searchUser);
         }, 500);
     }
 
     return (
         <Model close={close}>
-            {modelDelete && (
-                <CustomDeleteModel
-                    close={closeModelDelete}
-                    onClickDelete={handleRemoveUser}
-                    msg={
-                        "Bạn có chắc chắn muốn loại thành viên này ra khỏi dự án?"
-                    }
-                />
-            )}
             <div className="managerMembers">
                 <h2>Quản lý thành viên</h2>
-                <h3>{project.data.title}</h3>
+                <h3>{task.data.title}</h3>
                 <div className="input-group managerMembers__input">
                     <input
                         type="text"
@@ -121,7 +84,7 @@ const ManagerMembers = ({ close }) => {
                                         <img src={el.avatar} alt="" />
                                     </div>
                                     <p>{el.username}</p>
-                                    {project.data.members.findIndex(
+                                    {task.data.members.findIndex(
                                         (el1) => el1._id === el._id
                                     ) === -1 && (
                                         <div
@@ -143,10 +106,10 @@ const ManagerMembers = ({ close }) => {
                 </div>
                 <div className="managerMembers__members">
                     <p className="managerMembers__members-title">
-                        Tổng: {project.data?.members.length} thành viên
+                        Tổng: {task.data?.members.length} thành viên
                     </p>
                     <ul>
-                        {project.data?.members.map((el, i) => (
+                        {task.data?.members.map((el, i) => (
                             <li key={i} className="managerMembers__member">
                                 <div className="managerMembers__member-avatar">
                                     <img src={el.avatar} alt="" />
@@ -173,22 +136,12 @@ const ManagerMembers = ({ close }) => {
                                             <>
                                                 <div
                                                     className="item"
-                                                    onClick={() => {
-                                                        handleAddAdmins(el._id);
-                                                    }}
-                                                >
-                                                    <i className="bx bx-user-circle"></i>
-                                                    <p>Lên leader</p>
-                                                </div>
-                                                <div className="line">
-                                                    <div></div>
-                                                </div>
-                                                <div
-                                                    className="item"
-                                                    onClick={() => {
-                                                        setIdUserDelete(el._id);
-                                                        setModelDelete(true);
-                                                    }}
+                                                    onClick={() =>
+                                                        handleRemoveUser(
+                                                            el._id,
+                                                            el.username
+                                                        )
+                                                    }
                                                 >
                                                     <i className="bx bx-log-out"></i>
                                                     <p>Loại thành viên</p>
@@ -206,4 +159,4 @@ const ManagerMembers = ({ close }) => {
     );
 };
 
-export default ManagerMembers;
+export default ManagerMemberTask;

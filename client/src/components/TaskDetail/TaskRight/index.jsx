@@ -8,8 +8,10 @@ import CustomTitleModel from "./CustomTitleModel";
 import CustomDecModel from "./CustomDecModel";
 
 import { updateTask } from "../../../redux/thunk/column";
+import ManagerMemberTask from "./ManagerMembersTask";
 
 const TaskRight = () => {
+    const [modelManagerMember, setModelManagerMember] = useState(false);
     const dispatch = useDispatch();
     const { auth, project, task } = useSelector((state) => state);
     const [value, setValue] = useState(
@@ -84,8 +86,15 @@ const TaskRight = () => {
         );
     }
 
+    function closeModelManagerMember() {
+        setModelManagerMember(false);
+    }
+
     return (
         <div className="taskRight">
+            {modelManagerMember && (
+                <ManagerMemberTask close={closeModelManagerMember} />
+            )}
             {titleModel && (
                 <CustomTitleModel
                     close={closeTitleModel}
@@ -181,6 +190,36 @@ const TaskRight = () => {
             </div>
             <div className="taskRight__date ml-40">
                 <DatePicker value={value} onChange={onChangeDeadline} />
+            </div>
+            <div className="taskRight__name">
+                <div className="taskRight__name-icon">
+                    <i className="bx bx-group"></i>
+                </div>
+                <p>Thành viên</p>
+            </div>
+            <div className="taskRight__tag ml-40">
+                <div className="members">
+                    {task.data?.members.slice(0, 4).map((e, i) => {
+                        return (
+                            <div className="avatar" key={i}>
+                                <img src={e.avatar} alt="" />
+                            </div>
+                        );
+                    })}
+                    {task.data?.members.length > 4 && (
+                        <div className="avatar">
+                            <div className="more">
+                                +{task.data?.members.length - 4}
+                            </div>
+                        </div>
+                    )}
+                </div>
+                <button
+                    className="btn contain"
+                    onClick={() => setModelManagerMember(true)}
+                >
+                    Thêm thành viên
+                </button>
             </div>
         </div>
     );

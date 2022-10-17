@@ -8,18 +8,39 @@
         font-weight: 600;
     }
 
+    &__item {
+        display: flex;
+        align-items: center;
+        margin: 0px 30px;
+        padding: 15px 0;
+        border-bottom: 1px solid #ddd;
+        i {
+            font-size: 30px;
+            color: var(--main-color);
+            margin-right: 15px;
+        }
+
+        p {
+            font-size: 18px;
+            font-weight: 500;
+        }
+    }
+
     &__avatar {
         border-top: 1px solid #ddd;
         padding-top: 30px;
-        margin: 20px 30px;
+        margin: 30px 20px 50px;
         display: flex;
         align-items: center;
+        justify-content: center;
+        position: relative;
         &-img {
             height: 150px;
             width: 150px;
             border-radius: 50%;
             overflow: hidden;
             flex-shrink: 0;
+            border: 4px solid var(--main-color);
             img {
                 width: 100%;
                 height: 100%;
@@ -28,10 +49,19 @@
         }
 
         &-btn {
-            margin-left: 50px;
-            button.btn {
-                margin: 10px 0;
-            }
+            position: absolute;
+            background-color: black;
+            color: white;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            bottom: 0;
+            transform: translateY(50%);
+            cursor: pointer;
         }
     }
 
@@ -48,10 +78,9 @@
 
 .linkModel {
     padding: 0 30px;
-    text-align: center;
 
     h3 {
-        margin-bottom: 15px;
+        margin: 15px 0 5px;
     }
     .col-6 {
         padding-right: 10px;

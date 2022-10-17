@@ -33,6 +33,9 @@ const Comment = () => {
                     name=""
                     id=""
                     placeholder="Hãy bình luận về nhiệm vụ này"
+                    style={{
+                        resize: "none",
+                    }}
                 ></textarea>
                 <div className="comment__input-btns">
                     <div>

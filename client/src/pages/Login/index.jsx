@@ -6,7 +6,7 @@ import loginThunk from "../../redux/thunk/login";
 
 const Login = () => {
     const [login, setLogin] = useState({
-        username: "",
+        email: "",
         password: "",
     });
 
@@ -41,17 +41,17 @@ const Login = () => {
                         alt="logo"
                     />
                 </div>
-                <h2 className="name">Website quản lý dự án</h2>
+                <h2 className="name">Quản lý dự án</h2>
                 <div className="input-group">
                     <input
                         type="text"
-                        placeholder="Tài Khoản"
-                        value={login.username}
-                        name="username"
+                        placeholder="Email"
+                        value={login.email}
+                        name="email"
                         onChange={handleChangeInput}
                         required
                     />
-                    <i className="bx bxs-user"></i>
+                    <i className="bx bxs-envelope"></i>
                 </div>
                 <div className="input-group">
                     <input

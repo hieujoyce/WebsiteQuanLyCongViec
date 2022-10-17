@@ -9,6 +9,7 @@ import {
 import { createColumn, updateColumn } from "../controllers/columnCtrl.js";
 import {
     createTask,
+    deleteTask,
     getTaskByID,
     updateTask,
 } from "../controllers/taskCtrl.js";
@@ -60,6 +61,13 @@ router.patch(
     isMembers,
     isAdmins,
     updateTask
+);
+
+router.delete(
+    "/project/:idProject/task/:idTask",
+    isAuth,
+    isMembers,
+    deleteTask
 );
 
 router.get("/project/:idProject/task/:idTask", isAuth, isMembers, getTaskByID);

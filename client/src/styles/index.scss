@@ -125,6 +125,7 @@ input {
     .content {
         padding-left: var(--width-nav);
         padding-top: var(--height-nav-top);
+        transition: padding-left 0.5s ease-in-out;
     }
 }
 
@@ -203,6 +204,17 @@ input {
 .input-group {
     position: relative;
 
+    &__label {
+        margin: 5px 0 10px;
+        display: flex;
+        align-items: center;
+        color: red;
+        i {
+            font-size: 16px;
+            margin-right: 5px;
+        }
+    }
+
     input {
         padding: 14px 14px 14px 40px;
         font-size: 16px;
@@ -241,6 +253,22 @@ input {
 
     & + .input-group {
         margin-top: 20px;
+    }
+
+    &.err input {
+        border: 2px solid red;
+        background-color: rgb(243, 231, 231);
+        &:active,
+        &:focus {
+            border: 2px solid red;
+            & + i {
+                color: red;
+            }
+        }
+    }
+
+    &.err i {
+        color: red;
     }
 }
 

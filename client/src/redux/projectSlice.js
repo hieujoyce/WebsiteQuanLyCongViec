@@ -4,6 +4,7 @@ import {
     updateColumn,
     createColumn,
     updateTask,
+    deleteTask,
 } from "./thunk/column";
 import { updateProjectColumnOrder, updateProjectv2 } from "./thunk/project";
 
@@ -42,6 +43,16 @@ const projectSlice = createSlice({
         builder
             .addCase(updateProjectv2.fulfilled, (state, action) => {
                 state.data = action.payload.project;
+            })
+            .addCase(deleteTask.fulfilled, (state, action) => {
+                state.data.columns.forEach((el) => {
+                    el.tasks = el.tasks.filter(
+                        (el1) => el1._id !== action.payload.idTask
+                    );
+                    el.taskOrder = el.taskOrder.filter(
+                        (el1) => el1 !== action.payload.idTask
+                    );
+                });
             })
             .addCase(createColumn.fulfilled, (state, action) => {
                 state.data.columnOrder.push(action.payload.column._id);

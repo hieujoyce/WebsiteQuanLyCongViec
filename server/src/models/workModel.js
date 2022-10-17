@@ -15,12 +15,6 @@ const workSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    members: [
-        {
-            type: mongoose.Types.ObjectId,
-            ref: "users",
-        },
-    ],
 });
 
 export default mongoose.model("works", workSchema);

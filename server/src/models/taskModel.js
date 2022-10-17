@@ -24,6 +24,12 @@ const taskSchema = new mongoose.Schema(
             type: mongoose.Types.ObjectId,
             ref: "columns",
         },
+        members: [
+            {
+                type: mongoose.Types.ObjectId,
+                ref: "users",
+            },
+        ],
         project: {
             type: mongoose.Types.ObjectId,
             ref: "projects",

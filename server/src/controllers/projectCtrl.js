@@ -1,4 +1,4 @@
-import { Project, Column, Task } from "../models/index.js";
+import { Project, Column, Task, Comment, Work } from "../models/index.js";
 
 export const createProject = async (req, res) => {
     try {
@@ -41,7 +41,6 @@ export const createProject = async (req, res) => {
 export const getAllProject = async (req, res) => {
     try {
         const data = await Project.find({ members: req.user._id });
-        console.log(data.map((e) => `${e._id}`));
         return res.json({
             msg: "Lấy dữ liệu thành công.",
             projects: data,
@@ -55,13 +54,20 @@ export const getProjectById = async (req, res) => {
     try {
         const data = await Project.findOne({ _id: req.params.idProject })
             .populate("columns")
-            .populate({ path: "members", select: { avatar: 1, username: 1 } })
+            .populate({
+                path: "members",
+                select: { email: 1, avatar: 1, username: 1 },
+            })
             .populate({
                 path: "columns",
                 populate: {
                     path: "tasks",
                     populate: {
                         path: "works",
+                    },
+                    populate: {
+                        path: "members",
+                        select: { avatar: 1 },
                     },
                 },
             });
@@ -82,8 +88,19 @@ export const deleteProject = async (req, res) => {
 
         await Project.findOneAndDelete({ _id: req.params.idProject });
         await Column.deleteMany({ project: req.params.idProject });
+        const taskData = await Task.find({ project: req.params.idProject });
+        const taskArr = taskData.map((el) => `${el._id}`);
         await Task.deleteMany({ project: req.params.idProject });
-
+        await Comment.deleteMany({
+            task: {
+                $in: taskArr,
+            },
+        });
+        await Work.deleteMany({
+            task: {
+                $in: taskArr,
+            },
+        });
         return res.json({
             msg: "Xóa dự án thành công.",
         });
@@ -106,7 +123,10 @@ export const updateProject = async (req, res) => {
             }
         )
             .populate("columns")
-            .populate({ path: "members", select: { avatar: 1, username: 1 } })
+            .populate({
+                path: "members",
+                select: { email: 1, avatar: 1, username: 1 },
+            })
             .populate({ path: "columns", populate: "tasks" });
         return res.json({
             msg: req.body.columnOrder ? "" : "Cập nhật dũ liệu thành công.",

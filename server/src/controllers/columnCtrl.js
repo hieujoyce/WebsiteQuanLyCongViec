@@ -33,7 +33,13 @@ export const updateColumn = async (req, res) => {
             { _id: req.params.idColumn },
             { title, tasks, taskOrder },
             { returnDocument: "after" }
-        ).populate("tasks");
+        ).populate({
+            path: "tasks",
+            populate: {
+                path: "members",
+                select: { avatar: 1, username: 1 },
+            },
+        });
 
         return res.json({
             msg: "Cập nhật dự liệu thành công",

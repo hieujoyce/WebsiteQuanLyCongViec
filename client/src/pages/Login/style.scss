@@ -68,4 +68,12 @@
             font-size: 14px;
         }
     }
+    .input-group {
+        &__label {
+            p {
+                margin: 0;
+                font-size: 12px;
+            }
+        }
+    }
 }

@@ -147,9 +147,6 @@ const TaskItem = ({ index, workData }) => {
                     <div className="row jus-end">
                         <DatePicker onChange={onChangeDeadline} value={value} />
                         <div className="taskList__item-btns">
-                            <button className="btn">
-                                <i className="bx bx-user-plus"></i>
-                            </button>
                             <button
                                 className="btn delete"
                                 onClick={() => setModelDelete(true)}

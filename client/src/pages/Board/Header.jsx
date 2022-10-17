@@ -59,9 +59,8 @@ const Header = ({ project }) => {
             <div className="top">
                 <div className="info">
                     <h2 className="name">
-                        <span>Dự án</span> /{" "}
                         <span>
-                            <Link to={"/board"}>Dự án của tôi</Link>
+                            <Link to={"/board"}>Dự án</Link>
                         </span>{" "}
                         / <span className="active">{project?.title}</span>
                     </h2>
@@ -89,8 +88,6 @@ const Header = ({ project }) => {
                     <a href="/" className="active">
                         Bảng
                     </a>
-                    <a href="/">Mốc thời gian</a>
-                    <a href="/">File</a>
                 </div>
                 <div className="right">
                     {project?.admins.includes(auth.user._id) && (
@@ -102,12 +99,6 @@ const Header = ({ project }) => {
                             <i className="bx bx-user-plus"></i>
                         </button>
                     )}
-                    <button className="btn">
-                        <i className="bx bx-cog"></i>
-                    </button>
-                    <button className="btn">
-                        <i className="bx bx-help-circle"></i>
-                    </button>
                     <button
                         onClick={() => setModel(true)}
                         className="btn contain"

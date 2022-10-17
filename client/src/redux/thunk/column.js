@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { postApi, patchApi } from "../../utils/api";
+import { postApi, patchApi, deleteApi } from "../../utils/api";
 
 const createTask = createAsyncThunk(
     "users/createTask",
@@ -35,13 +35,31 @@ const createTaskComment = createAsyncThunk(
 
 const updateTask = createAsyncThunk(
     "users/updateTask",
-    async ({ data, token, idProject, idTask }, thunkApi) => {
+    async ({ data, token, idProject, idTask, content }, thunkApi) => {
         try {
             const res = await patchApi(
                 `project/${idProject}/task/${idTask}`,
                 data,
                 token
             );
+            await postApi("/activate", { content, project: idProject }, token);
+            return res.data;
+        } catch (error) {
+            const errMsg = error.response.data.err || error.message;
+            return thunkApi.rejectWithValue(errMsg);
+        }
+    }
+);
+
+const deleteTask = createAsyncThunk(
+    "users/deleteTask",
+    async ({ token, idProject, idTask, content }, thunkApi) => {
+        try {
+            const res = await deleteApi(
+                `project/${idProject}/task/${idTask}`,
+                token
+            );
+            await postApi("/activate", { content, project: idProject }, token);
             return res.data;
         } catch (error) {
             const errMsg = error.response.data.err || error.message;
@@ -104,4 +122,5 @@ export {
     createColumn,
     updateTask,
     createTaskComment,
+    deleteTask,
 };

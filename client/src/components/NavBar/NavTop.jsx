@@ -2,8 +2,10 @@ import { useState } from "react";
 import "./nav-top.scss";
 import { useSelector } from "react-redux";
 import Profile from "./Profile";
+import { useNavigate } from "react-router-dom";
 
 const NavTop = () => {
+    const navigate = useNavigate();
     const [profileModel, setProfileModel] = useState(false);
     function close() {
         setProfileModel(false);
@@ -19,7 +21,7 @@ const NavTop = () => {
         <div className="nav-top">
             {profileModel && <Profile close={close} />}
             <div className="search">
-                <div className="back icon">
+                <div className="back icon" onClick={() => navigate(-1)}>
                     <i className="bx bx-left-arrow-alt"></i>
                 </div>
                 <div className="input">
@@ -30,7 +32,7 @@ const NavTop = () => {
             <div className="right">
                 <div className="notifi icon dropdown">
                     <i className="bx bx-bell"></i>
-                    <div className="number">16</div>
+                    {/* <div className="number">16</div> */}
                 </div>
                 <div className="info dropdown">
                     <div className="avatar">
@@ -44,7 +46,7 @@ const NavTop = () => {
                             onClick={() => setProfileModel(true)}
                         >
                             <i className="bx bx-user-circle"></i>
-                            <p>Profile</p>
+                            <p>Thông tin cá nhân</p>
                         </div>
                         <div className="line">
                             <div></div>
